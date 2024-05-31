@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<VBox alignment="CENTER" spacing="2.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.micasa.calculadora.CalculadoraController.CalculadoraController" >
+        <children>
+            <TextField fx:id="campoNumero"/>
+            <Button text="suma" onAction="#agregarSuma"/>
+            <Button text="resta" onAction="#agregarResta"/>
+            <Button text="mmult" onAction="#agregarMult"/>
+            <Button text="division" onAction="#agregarDivision"/>
+            <Button text="igual" onAction="#crearResultado"/>
+            <TextField fx:id="campoResultado"/>
+        </children>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" /><!--Dimesiones del padding de la pantalla-->
+    </padding>
+    </VBox>
