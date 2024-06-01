@@ -58,7 +58,6 @@ public class CalculadoraController {
         campoNumero.positionCaret(campoNumero.getText().length());
     }
 
-    @FXML
     public void agregarChar(char valor){
         StringBuilder temp = new StringBuilder();
         boolean ultimoValido;
@@ -75,6 +74,29 @@ public class CalculadoraController {
         campoNumero.setText(temp.toString());
         campoNumero.requestFocus();
         campoNumero.positionCaret(campoNumero.getText().length());
+    }
+
+    private boolean comprobarUltimo(char ultimo, char valor) {
+        return switch (valor) {
+            case '+', '*', '/' -> {
+                if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/' || ultimo == '(' || ultimo == 'x')
+                    yield false;
+                yield true;
+            }
+            case '-' -> {
+                if (ultimo == '-' || ultimo == '+')
+                    yield false;
+                yield true;
+            }
+            default -> true;
+        };
+    }
+
+    @FXML
+    public void crearResultado(){
+        String campo = campoNumero.getText();
+        String resultado = (Calculadora.producirResultado(campo));
+        campoResultado.setText(resultado);
     }
 
     @FXML
@@ -98,31 +120,62 @@ public class CalculadoraController {
     }
 
     @FXML
-    public void crearResultado(){
-        String campo = campoNumero.getText();
-        String resultado = (Calculadora.producirResultado(campo));
-        campoResultado.setText(resultado);
+    public void crearPunto() {
+        agregarChar(".");
+    }
+
+    @FXML
+    public void crear0() {
+        agregarChar("0");
+    }
+
+    @FXML
+    public void crear1() {
+        agregarChar("1");
+    }
+
+    @FXML
+    public void crear2() {
+        agregarChar("2");
+    }
+
+    @FXML
+    public void crear3() {
+        agregarChar("3");
+    }
+
+    @FXML
+    public void crear4() {
+        agregarChar("4");
+    }
+
+    @FXML
+    public void crear5() {
+        agregarChar("5");
+    }
+
+    @FXML
+    public void crear6() {
+        agregarChar("6");
+    }
+
+    @FXML
+    public void crear7() {
+        agregarChar("7");
+    }
+
+    @FXML
+    public void crear8() {
+        agregarChar("8");
+    }
+
+    @FXML
+    public void crear9() {
+        agregarChar("9");
     }
 
     private void agregarChar(String valor){
         campoNumero.setText(campoNumero.getText()+valor);
         filtrarTeclado(valor);
     }
-
-    private boolean comprobarUltimo(char ultimo, char valor) {
-        return switch (valor) {
-            case '+', '*', '/' -> {
-                if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/' || ultimo == '(' || ultimo == 'x')
-                    yield false;
-                yield true;
-            }
-            case '-' -> {
-                if (ultimo == '-' || ultimo == '+')
-                    yield false;
-                yield true;
-            }
-            default -> true;
-        };
-    }
-
 }

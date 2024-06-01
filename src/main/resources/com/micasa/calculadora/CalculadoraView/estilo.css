@@ -1,4 +1,4 @@
-#listaBotones{
+.listaBotones{
     -fx-alignment: CENTER;
     -fx-spacing: 10;
 }
@@ -16,4 +16,12 @@ TextField{
 
 Label{
     -fx-font-size: 16;
+}
+
+#botonesOp{
+    -fx-padding : 10;
+}
+
+campoResultado{
+    -fx-background-color: BLACK;
 }

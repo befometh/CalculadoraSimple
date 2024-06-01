@@ -16,8 +16,13 @@ public class Calculadora {
                 ArrayList<Character> ops = separarSignos(campo);
                 resultado = realizarOps(nums, ops);
             }
-        } catch(Exception e) {
+        }
+        catch (NumberFormatException e){
+            resultado = "Se ha ingresado un valor inválido";
+        }
+        catch(Exception e) {
             System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         return resultado;
     }
