@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--Autor: Cristyan Fernando Morales Acevedo-->
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.TextField?>
@@ -11,12 +11,31 @@
       fx:controller="com.micasa.calculadora.CalculadoraController.CalculadoraController">
     <Label text="Ingrese la operación:"/>
     <TextField fx:id="campoNumero"/>
-    <HBox id="listaBotones">
+    <HBox styleClass="listaBotones">
+        <Button text="7" onAction="#crear9"/>
+        <Button text="8" onAction="#crear8"/>
+        <Button text="9" onAction="#crear7"/>
+    </HBox>
+    <HBox styleClass="listaBotones">
+        <Button text="4" onAction="#crear6"/>
+        <Button text="5" onAction="#crear5"/>
+        <Button text="6" onAction="#crear4"/>
+    </HBox>
+    <HBox styleClass="listaBotones">
+        <Button text="1" onAction="#crear3"/>
+        <Button text="2" onAction="#crear2"/>
+        <Button text="3" onAction="#crear1"/>
+    </HBox>
+    <HBox styleClass="listaBotones">
+        <Button text="0" onAction="#crear0"/>
+        <Button text=" ." onAction="#crearPunto"/>
+        <Button text="=" onAction="#crearResultado"/>
+    </HBox>
+    <HBox styleClass="listaBotones" id="botonesOp">
         <Button text="+" onAction="#agregarSuma"/>
         <Button text="-" onAction="#agregarResta"/>
         <Button text="x" onAction="#agregarMult"/>
         <Button text="/" onAction="#agregarDivision"/>
-        <Button text="=" onAction="#crearResultado"/>
     </HBox>
     <Label text="Resultado:"/>
     <TextField fx:id="campoResultado" id="campoResultado"/>
