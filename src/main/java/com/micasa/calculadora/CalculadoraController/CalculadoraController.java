@@ -19,8 +19,16 @@ public class CalculadoraController {
     public void initialize() {
         campoResultado.setEditable(false);
         campoNumero.addEventFilter(KeyEvent.KEY_RELEASED, e -> {
-            if(e.getCode() != KeyCode.BACK_SPACE)
+            System.out.println(e.getCode());
+            if(
+                    e.getCode() != KeyCode.BACK_SPACE&&
+                            e.getCode() != KeyCode.DELETE&&
+                            e.getCode() != KeyCode.ENTER&&
+                            !e.getCode().isNavigationKey())
                 filtrarTeclado(e.getText());
+            else if (e.getCode() == KeyCode.ENTER) {
+                crearResultado();
+            }
         });
     }
 
@@ -31,7 +39,6 @@ public class CalculadoraController {
             ingreso = elem.charAt(0);
         }catch(Exception e){
             System.out.println("Error: "+e.getMessage());
-            System.out.println("-".repeat(200));
         }
         String patron = "^([0-9\\-][0-9+\\-*/.,]*)$";
         Pattern regex = Pattern.compile(patron);

@@ -6,14 +6,18 @@ public class Calculadora {
 
     public static String producirResultado(String texto) {
         String campo = texto;
-        String resultado;
-        if(texto.isEmpty())
-            return "El campo se encuentra vacío";
-        else {
-            campo = tratarTexto(campo);
-            ArrayList<Double> nums = separarNumeros(campo);
-            ArrayList<Character> ops = separarSignos(campo);
-            resultado = realizarOps(nums, ops);
+        String resultado = "";
+        try{
+            if (texto.isEmpty())
+                return "El campo se encuentra vacío";
+            else {
+                campo = tratarTexto(campo);
+                ArrayList<Double> nums = separarNumeros(campo);
+                ArrayList<Character> ops = separarSignos(campo);
+                resultado = realizarOps(nums, ops);
+            }
+        } catch(Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
         return resultado;
     }
@@ -63,7 +67,7 @@ public class Calculadora {
         return ops;
     }
 
-    private static ArrayList<Double> separarNumeros(String texto) throws NumberFormatException {
+    private static ArrayList<Double> separarNumeros(String texto) throws Exception {
         ArrayList<Double> nums = new ArrayList<>();
         String[] datos = texto.split("[+*/]");
         for (String dato : datos)
@@ -78,7 +82,16 @@ public class Calculadora {
             conSigno.append(valor.charAt(0));
             valor = valor.substring(1);
         }
-        valor = valor.replace("-","+-");
+        for(int i = 1; i < valor.length(); i++){
+            if(valor.charAt(i) == '-'&&(valor.charAt(i-1)!='*'&&valor.charAt(i-1)!='/')){
+                StringBuilder temp = new StringBuilder();
+                temp.append(valor,0,i);
+                temp.append('+');
+                temp.append(valor,i,valor.length());
+                valor = temp.toString();
+                i++;
+            }
+        }
         conSigno.append(valor);
         return conSigno.toString();
     }

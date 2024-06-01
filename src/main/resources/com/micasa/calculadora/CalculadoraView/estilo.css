@@ -3,6 +3,10 @@
     -fx-spacing: 10;
 }
 
+Button{
+    -fx-padding: 5 30;
+    -fx-font-size: 20;
+}
 
 TextField{
     -fx-max-width: 500;

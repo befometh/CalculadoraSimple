@@ -6,21 +6,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <VBox alignment="CENTER" spacing="2.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.micasa.calculadora.CalculadoraController.CalculadoraController" >
-            <TextField fx:id="campoNumero"/>
-            <HBox id="listaBotones">
-                <Button text="+" onAction="#agregarSuma"/>
-                <Button text="-" onAction="#agregarResta"/>
-                <Button text="x" onAction="#agregarMult"/>
-                <Button text="/" onAction="#agregarDivision"/>
-                <Button text="=" onAction="#crearResultado"/>
-            </HBox>
-            <TextField fx:id="campoResultado"/>
+      fx:controller="com.micasa.calculadora.CalculadoraController.CalculadoraController">
+    <Label text="Ingrese la operación:"/>
+    <TextField fx:id="campoNumero"/>
+    <HBox id="listaBotones">
+        <Button text="+" onAction="#agregarSuma"/>
+        <Button text="-" onAction="#agregarResta"/>
+        <Button text="x" onAction="#agregarMult"/>
+        <Button text="/" onAction="#agregarDivision"/>
+        <Button text="=" onAction="#crearResultado"/>
+    </HBox>
+    <Label text="Resultado:"/>
+    <TextField fx:id="campoResultado" id="campoResultado"/>
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20" /><!--Dimesiones del padding de la pantalla-->
+        <Insets top="20" right="20" bottom="20" left="20"/><!--Dimesiones del padding de la pantalla-->
     </padding>
     <stylesheets>
         <URL value="@estilo.css"/>
     </stylesheets>
-    </VBox>
+</VBox>
