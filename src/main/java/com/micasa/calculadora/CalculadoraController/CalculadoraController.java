@@ -72,22 +72,22 @@ public class CalculadoraController {
 
     @FXML
     public void agregarSuma(){
-        filtrarTeclado("+");
+        agregarChar("+");
     }
 
     @FXML
     public void agregarResta(){
-        filtrarTeclado("-");
+        agregarChar("-");
     }
 
     @FXML
     public void agregarMult(){
-        filtrarTeclado("*");
+        agregarChar("*");
     }
 
     @FXML
     public void agregarDivision(){
-        filtrarTeclado("/");
+        agregarChar("/");
     }
 
     @FXML
@@ -95,6 +95,11 @@ public class CalculadoraController {
         String campo = campoNumero.getText();
         String resultado = (Calculadora.producirResultado(campo));
         campoResultado.setText(resultado);
+    }
+
+    private void agregarChar(String valor){
+        campoNumero.setText(campoNumero.getText()+valor);
+        filtrarTeclado(valor);
     }
 
     private boolean comprobarUltimo(char ultimo, char valor) {
