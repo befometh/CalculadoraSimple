@@ -1,42 +1,87 @@
 package com.micasa.calculadora.CalculadoraModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Calculadora {
-    private static ArrayList<Double>  nums = new ArrayList<>();
-    private static ArrayList<String>  ops;
 
-    public static String producirResultado(String ingreso){
-        ingreso = ingreso.replace(",",".");
-        try{
-            nums = evaluarFlotantes(ingreso);
-            ops = evaluarSignos(ingreso);
-        }catch(Exception e){
-            e.getStackTrace();
+    public static String producirResultado(String texto) {
+        String campo = texto;
+        String resultado;
+        if(texto.isEmpty())
+            return "El campo se encuentra vacío";
+        else {
+            campo = tratarTexto(campo);
+            ArrayList<Double> nums = separarNumeros(campo);
+            ArrayList<Character> ops = separarSignos(campo);
+            resultado = realizarOps(nums, ops);
         }
-        StringBuilder result = new StringBuilder(ops.toString());
-        result.append(nums.toString());
-        return result.toString();
+        return resultado;
     }
 
-    private static ArrayList<String> evaluarSignos(String dato) {
-        ArrayList<String> caracteres = new ArrayList<>(List.of(dato.split("")));
-        ArrayList<String> signos = new ArrayList<>();
-        for(String elem: caracteres){
-            if(
-                    elem.equals("+")|| elem.equals("-")||elem.equals("*")||elem.equals("/")
-            ) signos.add(elem);
+    private static String realizarOps(ArrayList<Double> nums, ArrayList<Character> ops) {
+        if(ops.isEmpty()){
+            return nums.getFirst().toString();
+        } else{
+            int contador = 0;
+            if(ops.contains('*')||ops.contains('/')){
+                while(contador < ops.size()){
+                    if(ops.get(contador) == '*'){
+                        nums.set(contador, nums.get(contador)*nums.get(contador+1));
+                        ops.remove(contador);
+                        nums.remove(contador+1);
+                    }
+                    else if(ops.get(contador) == '/'){
+                        nums.set(contador, nums.get(contador)/nums.get(contador+1));
+                        ops.remove(contador);
+                        nums.remove(contador+1);
+                    }
+                    contador++;
+                }
+                return realizarOps(nums,ops);
+            }else if(ops.contains('+')){
+                while(contador < ops.size()){
+                    if(ops.get(contador) == '+'){
+                        nums.set(contador, nums.get(contador)+nums.get(contador+1));
+                        ops.remove(contador);
+                        nums.remove(contador+1);
+                    }
+                    contador++;
+                }
+                return realizarOps(nums,ops);
+            }
         }
-        return signos;
+        return "Ha ocurrido un error";
     }
 
-    private static ArrayList<Double> evaluarFlotantes(String dato) throws  Exception{
-        ArrayList<Double> valores = new ArrayList<>();
-        ArrayList<String> campos = new ArrayList<>(List.of(dato.split("[+\\-*/]")));
-        for(String elem: campos) {
-            valores.add(Double.parseDouble(elem));
+    private static ArrayList<Character> separarSignos(String texto) {
+        ArrayList<Character> ops = new ArrayList<>();
+        for (int i = 0; i < texto.length(); i++) {
+            if (texto.charAt(i) == '+' || texto.charAt(i) == '*' || texto.charAt(i) == '/') {
+                ops.add(texto.charAt(i));
+            }
         }
-        return valores;
+        return ops;
     }
+
+    private static ArrayList<Double> separarNumeros(String texto) throws NumberFormatException {
+        ArrayList<Double> nums = new ArrayList<>();
+        String[] datos = texto.split("[+*/]");
+        for (String dato : datos)
+            nums.add(Double.parseDouble(dato));
+        return nums;
+    }
+
+    private static String tratarTexto(String texto) {
+        String valor = texto.replace(",", ".");
+        StringBuilder conSigno = new StringBuilder();
+        if (valor.charAt(0) == '-') {
+            conSigno.append(valor.charAt(0));
+            valor = valor.substring(1);
+        }
+        valor = valor.replace("-","+-");
+        conSigno.append(valor);
+        return conSigno.toString();
+    }
+
+
 }

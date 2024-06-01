@@ -1,0 +1,15 @@
+#listaBotones{
+    -fx-alignment: CENTER;
+    -fx-spacing: 10;
+}
+
+
+TextField{
+    -fx-max-width: 500;
+    -fx-font-family: Verdana;
+    -fx-font-size: 30;
+}
+
+Label{
+    -fx-font-size: 16;
+}

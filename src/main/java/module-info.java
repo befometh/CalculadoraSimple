@@ -5,7 +5,7 @@ module com.micasa.calculadora {
     requires java.net.http;
 
 
+    opens com.micasa.calculadora.CalculadoraController;
     exports com.micasa.calculadora.CalculadoraController to javafx.fxml;
     exports com.micasa.calculadora to javafx.graphics;
-    opens com.micasa.calculadora.CalculadoraController;
 }
